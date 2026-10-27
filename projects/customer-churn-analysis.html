@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en">
+ <head>
+  <meta charset="utf-8"/>
+  <meta content="width=device-width, initial-scale=1" name="viewport"/>
+  <title>
+   Telecom customer churn analysis | Shiv Sharma
+  </title>
+  <meta content="I compared five classifiers, selected a decision threshold on development data, and interpreted the final Logistic Regression model." name="description"/>
+  <meta content="#000000" name="theme-color"/>
+  <meta content="Telecom customer churn analysis | Shiv Sharma" property="og:title"/>
+  <meta content="I compared five classifiers, selected a decision threshold on development data, and interpreted the final Logistic Regression model." property="og:description"/>
+  <meta content="website" property="og:type"/>
+  <link href="../img/favicon.svg" rel="icon" type="image/svg+xml"/>
+  <link href="../css/main.css?v=20261027b" rel="stylesheet"/>
+ </head>
+ <body class="case-page">
+  <a class="skip-link" href="#main">
+   Skip to content
+  </a>
+  <header class="site-header wrap">
+   <a aria-label="Shiv Sharma, introduction" class="brand" href="../index.html">
+    Shiv Sharma
+   </a>
+   <nav aria-label="Main navigation">
+    <a href="https://github.com/staticbloom">
+     GitHub
+     <span aria-hidden="true">
+      ↗
+     </span>
+    </a>
+   </nav>
+  </header>
+  <main class="case-main wrap" id="main">
+   <a class="back-link" href="../projects.html#customer-churn-analysis">
+    ← Back to projects
+   </a>
+   <header class="case-header">
+    <p class="eyebrow">
+     Classification · Model interpretation
+    </p>
+    <h1>
+     Telecom customer churn analysis
+    </h1>
+    <p class="case-question">
+     Which customers are at higher risk of leaving?
+    </p>
+    <p class="case-intro">
+     I compared five classifiers, selected a decision threshold on development data, and interpreted the final Logistic Regression model.
+    </p>
+    <ul aria-label="Methods and tools" class="tags">
+     <li>
+      scikit-learn
+     </li>
+     <li>
+      Logistic Regression
+     </li>
+     <li>
+      SHAP
+     </li>
+    </ul>
+    <div class="project-actions">
+     <a class="button" href="https://github.com/staticbloom/customer-churn-analysis">
+      View repository
+      <span aria-hidden="true">
+       ↗
+      </span>
+     </a>
+     <a class="text-link" href="https://github.com/staticbloom/customer-churn-analysis/blob/main/notebooks/Telco-Churn.ipynb">
+      Open notebook
+      <span aria-hidden="true">
+       ↗
+      </span>
+     </a>
+    </div>
+   </header>
+   <section aria-label="Main result" class="case-result">
+    <div class="result">
+     <strong>
+      0.711
+     </strong>
+     <span>
+      recorded test F1
+      <small>
+       74.5% recall · 68.1% precision
+      </small>
+     </span>
+    </div>
+    <p>
+     A useful churn score needs an explicit trade-off: this threshold recovered about three quarters of churn cases, with false positives that a retention team would also need to handle.
+    </p>
+   </section>
+   <figure class="project-figure">
+    <a aria-label="Open full-size chart for Telecom customer churn analysis" class="chart-link" href="../img/projects/churn-confusion.png">
+     <img alt="Test confusion matrix: 645 true negatives, 92 false positives, 67 false negatives and 196 true positives." decoding="async" height="1317" loading="lazy" src="../img/projects/churn-confusion.png" width="1402"/>
+    </a>
+    <figcaption>
+     At the selected 0.353 threshold, the test model identified 196 churn cases, missed 67, and flagged 92 non-churn customers.
+     <span class="figure-hint">
+      Select chart to view full size
+      <span aria-hidden="true">
+       ↗
+      </span>
+     </span>
+    </figcaption>
+   </figure>
+   <div class="case-content">
+    <section aria-labelledby="approach">
+     <p class="eyebrow">
+      The process
+     </p>
+     <h2 id="approach">
+      How I approached it
+     </h2>
+     <ul class="approach-list">
+      <li>
+       <h3>
+        Prepare customer features
+       </h3>
+       <p>
+        Cleaned the supplied customer extract and built features from service, billing, usage and support attributes. Preprocessing stays within training pipelines.
+       </p>
+      </li>
+      <li>
+       <h3>
+        Compare five classifiers
+       </h3>
+       <p>
+        Compared Logistic Regression, Random Forest, XGBoost, CatBoost and LightGBM, then used five-fold out-of-fold predictions on development data to select the final model and threshold.
+       </p>
+      </li>
+      <li>
+       <h3>
+        Evaluate and explain
+       </h3>
+       <p>
+        Reported the locked test metrics and used coefficients and SHAP to interpret associations. Packaged the selected pipeline with a standalone scoring script.
+       </p>
+      </li>
+     </ul>
+    </section>
+    <section aria-labelledby="findings">
+     <p class="eyebrow">
+      The evidence
+     </p>
+     <h2 id="findings">
+      What the results show
+     </h2>
+     <div class="finding">
+      <h3>
+       F1 0.711 at threshold 0.353
+      </h3>
+      <p>
+       The recorded test result balances precision of 0.681 and recall of 0.745. ROC-AUC was 0.895; that describes ranking across thresholds, not the result of a retention campaign.
+      </p>
+     </div>
+     <div class="finding">
+      <h3>
+       A simple model was selected
+      </h3>
+      <p>
+       Logistic Regression was selected within the comparison. The analysis includes model interpretation and explicit threshold selection, rather than relying on the default 0.5 cut-off.
+      </p>
+     </div>
+    </section>
+   </div>
+   <section aria-labelledby="limits" class="limits">
+    <p class="eyebrow">
+     Reading the results responsibly
+    </p>
+    <h2 id="limits">
+     Where the evidence stops
+    </h2>
+    <p>
+     The augmented dataset’s provenance and the timing of its extra fields remain unverified. A random split does not establish future-period performance. Model associations are not causes, and no reduction in churn or financial savings was measured.
+    </p>
+    <h3>
+     What I would evaluate next
+    </h3>
+    <p>
+     Verify that each input exists before churn is observed, evaluate on a later customer cohort, and select any operational threshold using outreach costs and capacity.
+    </p>
+   </section>
+   <section aria-labelledby="available" class="availability">
+    <h2 id="available">
+     Explore the work
+    </h2>
+    <p>
+     The repository includes the selected model, aggregate results, a static HTML report and a synthetic input example. Source customer records and individual-customer exports are excluded. Inference works with the synthetic example.
+    </p>
+    <a class="text-link" href="https://github.com/staticbloom/customer-churn-analysis">
+     Code, results &amp; methodology
+     <span aria-hidden="true">
+      ↗
+     </span>
+    </a>
+   </section>
+  </main>
+  <footer class="site-footer wrap">
+   <p>
+    Shiv Sharma · Data analytics &amp; machine learning
+   </p>
+   <a href="../projects.html">
+    <span aria-hidden="true">
+     ←
+    </span>
+    Back to projects
+   </a>
+  </footer>
+ </body>
+</html>

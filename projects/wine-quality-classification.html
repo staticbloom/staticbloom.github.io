@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en">
+ <head>
+  <meta charset="utf-8"/>
+  <meta content="width=device-width, initial-scale=1" name="viewport"/>
+  <title>
+   Wine quality classification | Shiv Sharma
+  </title>
+  <meta content="I investigated six-class wine quality prediction with nested validation, resampling comparisons and an explicit focus on rare-grade performance." name="description"/>
+  <meta content="#000000" name="theme-color"/>
+  <meta content="Wine quality classification | Shiv Sharma" property="og:title"/>
+  <meta content="I investigated six-class wine quality prediction with nested validation, resampling comparisons and an explicit focus on rare-grade performance." property="og:description"/>
+  <meta content="website" property="og:type"/>
+  <link href="../img/favicon.svg" rel="icon" type="image/svg+xml"/>
+  <link href="../css/main.css?v=20261027b" rel="stylesheet"/>
+ </head>
+ <body class="case-page">
+  <a class="skip-link" href="#main">
+   Skip to content
+  </a>
+  <header class="site-header wrap">
+   <a aria-label="Shiv Sharma, introduction" class="brand" href="../index.html">
+    Shiv Sharma
+   </a>
+   <nav aria-label="Main navigation">
+    <a href="https://github.com/staticbloom">
+     GitHub
+     <span aria-hidden="true">
+      ↗
+     </span>
+    </a>
+   </nav>
+  </header>
+  <main class="case-main wrap" id="main">
+   <a class="back-link" href="../projects.html#wine-quality-classification">
+    ← Back to projects
+   </a>
+   <header class="case-header">
+    <p class="eyebrow">
+     Classification · Evaluation design
+    </p>
+    <h1>
+     Wine quality classification
+    </h1>
+    <p class="case-question">
+     How do rare classes change the way a classifier should be evaluated?
+    </p>
+    <p class="case-intro">
+     I investigated six-class wine quality prediction with nested validation, resampling comparisons and an explicit focus on rare-grade performance.
+    </p>
+    <ul aria-label="Methods and tools" class="tags">
+     <li>
+      scikit-learn
+     </li>
+     <li>
+      LDA
+     </li>
+     <li>
+      Nested validation
+     </li>
+    </ul>
+    <div class="project-actions">
+     <a class="button" href="https://github.com/staticbloom/wine-quality-classification">
+      View repository
+      <span aria-hidden="true">
+       ↗
+      </span>
+     </a>
+     <a class="text-link" href="https://github.com/staticbloom/wine-quality-classification/blob/main/notebook/Wine-Quality-Classification.ipynb">
+      Open notebook
+      <span aria-hidden="true">
+       ↗
+      </span>
+     </a>
+    </div>
+   </header>
+   <section aria-label="Main result" class="case-result">
+    <div class="result">
+     <strong>
+      0.367
+     </strong>
+     <span>
+      development CV macro F1
+      <small>
+       Six quality classes · No new V2 holdout
+      </small>
+     </span>
+    </div>
+    <p>
+     The most useful finding is the uneven class performance. An overall accuracy score can conceal poor recognition of rare grades; macro F1 and per-class evidence make that weakness visible.
+    </p>
+   </section>
+   <figure class="project-figure">
+    <a aria-label="Open full-size chart for Wine quality &amp; class imbalance" class="chart-link" href="../img/projects/wine-class-f1.png">
+     <img alt="Mean outer-fold F1 by wine quality: 0.337 for grade 3, 0.148 for 4, 0.674 for 5, 0.465 for 6, 0.464 for 7, and 0.111 for 8." decoding="async" height="560" loading="lazy" src="../img/projects/wine-class-f1.png" width="1262"/>
+    </a>
+    <figcaption>
+     The final V2 procedure performs unevenly across grades. Quality 5 is easiest, while qualities 4 and 8 remain difficult. These are development cross-validation results.
+     <span class="figure-hint">
+      Select chart to view full size
+      <span aria-hidden="true">
+       ↗
+      </span>
+     </span>
+    </figcaption>
+   </figure>
+   <div class="case-content">
+    <section aria-labelledby="approach">
+     <p class="eyebrow">
+      The process
+     </p>
+     <h2 id="approach">
+      How I approached it
+     </h2>
+     <ul class="approach-list">
+      <li>
+       <h3>
+        Protect the evaluation boundary
+       </h3>
+       <p>
+        Used development data for Version 2 and retained the original Version 1 holdout result separately. The old holdout was not used as a new V2 selection set.
+       </p>
+      </li>
+      <li>
+       <h3>
+        Keep transformations inside training folds
+       </h3>
+       <p>
+        Compared classifiers and imbalance treatments using four outer folds repeated ten times with three-fold inner CV. Scaling and resampling stay within the appropriate training folds.
+       </p>
+      </li>
+      <li>
+       <h3>
+        Inspect performance by grade
+       </h3>
+       <p>
+        Selected an LDA pipeline with gentle capped SMOTE and protected Tomek cleaning, then reviewed macro F1, ordinal metrics, confusion patterns and class-level results.
+       </p>
+      </li>
+     </ul>
+    </section>
+    <section aria-labelledby="findings">
+     <p class="eyebrow">
+      The evidence
+     </p>
+     <h2 id="findings">
+      What the results show
+     </h2>
+     <div class="finding">
+      <h3>
+       Development macro F1: 0.367
+      </h3>
+      <p>
+       The mean outer-fold result did not reach the 0.50 objective. The final fixed recipe has no newly observed independent holdout score.
+      </p>
+     </div>
+     <div class="finding">
+      <h3>
+       Rare grades remain a weakness
+      </h3>
+      <p>
+       Mean-fold F1 was 0.148 for quality 4 and 0.111 for quality 8. The 10,870 repeated OOF predictions represent only 1,087 unique development wines.
+      </p>
+     </div>
+    </section>
+   </div>
+   <section aria-labelledby="limits" class="limits">
+    <p class="eyebrow">
+     Reading the results responsibly
+    </p>
+    <h2 id="limits">
+     Where the evidence stops
+    </h2>
+    <p>
+     There is no new independent V2 holdout result. Repeated model exploration can make development estimates optimistic, synthetic samples do not increase independent sample size, and batch information is unavailable. No external validation or calibrated-probability claim is made.
+    </p>
+    <h3>
+     What I would evaluate next
+    </h3>
+    <p>
+     Collect genuinely new wines with batch information and use an external or group-aware evaluation before making claims about transfer to another population.
+    </p>
+   </section>
+   <section aria-labelledby="available" class="availability">
+    <h2 id="available">
+     Explore the work
+    </h2>
+    <p>
+     The repository includes the V2 model, synthetic examples, the report and its saved evaluation evidence. Raw source data and unsupported legacy model pickles are excluded. Inference and report review do not need the source CSV.
+    </p>
+    <a class="text-link" href="https://github.com/staticbloom/wine-quality-classification">
+     Code, results &amp; methodology
+     <span aria-hidden="true">
+      ↗
+     </span>
+    </a>
+   </section>
+  </main>
+  <footer class="site-footer wrap">
+   <p>
+    Shiv Sharma · Data analytics &amp; machine learning
+   </p>
+   <a href="../projects.html">
+    <span aria-hidden="true">
+     ←
+    </span>
+    Back to projects
+   </a>
+  </footer>
+ </body>
+</html>

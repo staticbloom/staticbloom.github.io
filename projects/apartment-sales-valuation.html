@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en">
+ <head>
+  <meta charset="utf-8"/>
+  <meta content="width=device-width, initial-scale=1" name="viewport"/>
+  <title>
+   Dubai apartment valuation | Shiv Sharma
+  </title>
+  <meta content="I built a CatBoost estimator from 124,015 development transactions, then investigated later-period errors and compared it with historical comparable sales." name="description"/>
+  <meta content="#000000" name="theme-color"/>
+  <meta content="Dubai apartment valuation | Shiv Sharma" property="og:title"/>
+  <meta content="I built a CatBoost estimator from 124,015 development transactions, then investigated later-period errors and compared it with historical comparable sales." property="og:description"/>
+  <meta content="website" property="og:type"/>
+  <link href="../img/favicon.svg" rel="icon" type="image/svg+xml"/>
+  <link href="../css/main.css?v=20261027b" rel="stylesheet"/>
+ </head>
+ <body class="case-page">
+  <a class="skip-link" href="#main">
+   Skip to content
+  </a>
+  <header class="site-header wrap">
+   <a aria-label="Shiv Sharma, introduction" class="brand" href="../index.html">
+    Shiv Sharma
+   </a>
+   <nav aria-label="Main navigation">
+    <a href="https://github.com/staticbloom">
+     GitHub
+     <span aria-hidden="true">
+      ↗
+     </span>
+    </a>
+   </nav>
+  </header>
+  <main class="case-main wrap" id="main">
+   <a class="back-link" href="../projects.html#apartment-sales-valuation">
+    ← Back to projects
+   </a>
+   <header class="case-header">
+    <p class="eyebrow">
+     Regression · Error analysis
+    </p>
+    <h1>
+     Dubai apartment valuation
+    </h1>
+    <p class="case-question">
+     How well does a price model hold up on later property sales?
+    </p>
+    <p class="case-intro">
+     I built a CatBoost estimator from 124,015 development transactions, then investigated later-period errors and compared it with historical comparable sales.
+    </p>
+    <ul aria-label="Methods and tools" class="tags">
+     <li>
+      CatBoost
+     </li>
+     <li>
+      Chronological validation
+     </li>
+     <li>
+      SHAP
+     </li>
+    </ul>
+    <div class="project-actions">
+     <a class="button" href="https://github.com/staticbloom/apartment-sales-valuation">
+      View repository
+      <span aria-hidden="true">
+       ↗
+      </span>
+     </a>
+     <a class="text-link" href="https://github.com/staticbloom/apartment-sales-valuation/blob/main/notebook/Finesse_Project4_Complete.ipynb">
+      Open notebook
+      <span aria-hidden="true">
+       ↗
+      </span>
+     </a>
+    </div>
+   </header>
+   <section aria-label="Main result" class="case-result">
+    <div class="result">
+     <strong>
+      0.645
+     </strong>
+     <span>
+      later-period evaluation R²
+      <small>
+       0.819 development CV R²
+      </small>
+     </span>
+    </div>
+    <p>
+     The fall from development to later-period performance is central to this study. A model score alone misses the concentration of errors, weaker luxury-property performance and the value of a comparable-sales baseline.
+    </p>
+   </section>
+   <figure class="project-figure">
+    <a aria-label="Open full-size chart for Dubai apartment price estimation" class="chart-link" href="../img/projects/property-errors.png">
+     <img alt="Cumulative squared-error plots show that a small share of transactions accounts for most error in both development and 2026 evaluation." decoding="async" height="1304" loading="lazy" src="../img/projects/property-errors.png" width="3057"/>
+    </a>
+    <figcaption>
+     Error concentration across development and the January–September 2026 evaluation. Extreme errors dominate the squared-error total; all observations remain included.
+     <span class="figure-hint">
+      Select chart to view full size
+      <span aria-hidden="true">
+       ↗
+      </span>
+     </span>
+    </figcaption>
+   </figure>
+   <div class="case-content">
+    <section aria-labelledby="approach">
+     <p class="eyebrow">
+      The process
+     </p>
+     <h2 id="approach">
+      How I approached it
+     </h2>
+     <ul class="approach-list">
+      <li>
+       <h3>
+        Define the valuation scope
+       </h3>
+       <p>
+        Restricted the study to ready residential units and developed the model on 2023–2025 registrations, with checks for invalid prices, areas and duplicate transaction IDs.
+       </p>
+      </li>
+      <li>
+       <h3>
+        Compare models over time
+       </h3>
+       <p>
+        Compared seven regression algorithms and a median benchmark across four expanding chronological folds. Feature ablation and a bounded parameter study selected a 20-feature CatBoost model.
+       </p>
+      </li>
+      <li>
+       <h3>
+        Investigate deployment-relevant failure
+       </h3>
+       <p>
+        Evaluated 26,291 later transactions, examined errors by price and property characteristics, studied uncertainty coverage, and built a benchmark using strictly earlier comparable sales.
+       </p>
+      </li>
+     </ul>
+    </section>
+    <section aria-labelledby="findings">
+     <p class="eyebrow">
+      The evidence
+     </p>
+     <h2 id="findings">
+      What the results show
+     </h2>
+     <div class="finding">
+      <h3>
+       Later-period R² fell to 0.645
+      </h3>
+      <p>
+       Development CV R² was 0.819. On January–September 2026 transactions, MAE was approximately AED 477,002. The later-period result did not meet the 0.70 R² target.
+      </p>
+     </div>
+     <div class="finding">
+      <h3>
+       Large errors deserve separate attention
+      </h3>
+      <p>
+       287 sales above AED 10 million accounted for about 79% of holdout squared error. Errors also deteriorated among ordinary properties, so luxury cases do not explain the entire decline.
+      </p>
+     </div>
+     <div class="finding">
+      <h3>
+       A benchmark can outperform a complex model
+      </h3>
+      <p>
+       On the same supported 2026 subset, comparable sales achieved R² 0.785 versus 0.667 for CatBoost. This matched-subset comparison does not replace the full-cohort model result.
+      </p>
+     </div>
+    </section>
+   </div>
+   <section aria-labelledby="limits" class="limits">
+    <p class="eyebrow">
+     Reading the results responsibly
+    </p>
+    <h2 id="limits">
+     Where the evidence stops
+    </h2>
+    <p>
+     The tool supports preliminary analysis, not a certified appraisal. Missing property identity, unfamiliar categories, skewed prices and temporal changes limit generalization. Historical prediction-interval coverage deteriorated in 2026; no guaranteed coverage is claimed.
+    </p>
+    <h3>
+     What I would evaluate next
+    </h3>
+    <p>
+     Use a new prospective evaluation cohort, monitor unfamiliar and missing attributes, and require human review for luxury properties and weak comparable coverage.
+    </p>
+   </section>
+   <section aria-labelledby="available" class="availability">
+    <h2 id="available">
+     Explore the work
+    </h2>
+    <p>
+     The repository includes the native CatBoost model, metadata, reports, aggregate evidence and a synthetic property example. Standalone inference is supported. Full notebook replay also needs excluded raw data and processed caches.
+    </p>
+    <a class="text-link" href="https://github.com/staticbloom/apartment-sales-valuation">
+     Code, results &amp; methodology
+     <span aria-hidden="true">
+      ↗
+     </span>
+    </a>
+   </section>
+  </main>
+  <footer class="site-footer wrap">
+   <p>
+    Shiv Sharma · Data analytics &amp; machine learning
+   </p>
+   <a href="../projects.html">
+    <span aria-hidden="true">
+     ←
+    </span>
+    Back to projects
+   </a>
+  </footer>
+ </body>
+</html>

@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en">
+ <head>
+  <meta charset="utf-8"/>
+  <meta content="width=device-width, initial-scale=1" name="viewport"/>
+  <title>
+   NHANES body measurement analysis | Shiv Sharma
+  </title>
+  <meta content="I explored body measurements with descriptive statistics, distribution plots, derived ratios, and Pearson and Spearman correlations." name="description"/>
+  <meta content="#000000" name="theme-color"/>
+  <meta content="NHANES body measurement analysis | Shiv Sharma" property="og:title"/>
+  <meta content="I explored body measurements with descriptive statistics, distribution plots, derived ratios, and Pearson and Spearman correlations." property="og:description"/>
+  <meta content="website" property="og:type"/>
+  <link href="../img/favicon.svg" rel="icon" type="image/svg+xml"/>
+  <link href="../css/main.css?v=20261027b" rel="stylesheet"/>
+ </head>
+ <body class="case-page">
+  <a class="skip-link" href="#main">
+   Skip to content
+  </a>
+  <header class="site-header wrap">
+   <a aria-label="Shiv Sharma, introduction" class="brand" href="../index.html">
+    Shiv Sharma
+   </a>
+   <nav aria-label="Main navigation">
+    <a href="https://github.com/staticbloom">
+     GitHub
+     <span aria-hidden="true">
+      ↗
+     </span>
+    </a>
+   </nav>
+  </header>
+  <main class="case-main wrap" id="main">
+   <a class="back-link" href="../projects.html#nhanes-body-measurements">
+    ← Back to projects
+   </a>
+   <header class="case-header">
+    <p class="eyebrow">
+     Exploratory analysis · Statistics
+    </p>
+    <h1>
+     NHANES body measurement analysis
+    </h1>
+    <p class="case-question">
+     What do distributions and body-measurement ratios reveal about a sample?
+    </p>
+    <p class="case-intro">
+     I explored body measurements with descriptive statistics, distribution plots, derived ratios, and Pearson and Spearman correlations.
+    </p>
+    <ul aria-label="Methods and tools" class="tags">
+     <li>
+      pandas
+     </li>
+     <li>
+      SciPy
+     </li>
+     <li>
+      Seaborn
+     </li>
+    </ul>
+    <div class="project-actions">
+     <a class="button" href="https://github.com/staticbloom/nhanes-data-analysis">
+      View repository
+      <span aria-hidden="true">
+       ↗
+      </span>
+     </a>
+     <a class="text-link" href="https://github.com/staticbloom/nhanes-data-analysis/blob/main/notebooks/nhanes_analysis.ipynb">
+      Open notebook
+      <span aria-hidden="true">
+       ↗
+      </span>
+     </a>
+    </div>
+   </header>
+   <section aria-label="Main result" class="case-result">
+    <div class="result">
+     <strong>
+      EDA
+     </strong>
+     <span>
+      sample-level descriptive analysis
+      <small>
+       Distributions · Ratios · Correlations
+      </small>
+     </span>
+    </div>
+    <p>
+     Looking at the spread, overlap and outliers makes the comparison more informative than a single average. Derived ratios offer another view of the measurements, while still requiring careful interpretation.
+    </p>
+   </section>
+   <figure class="project-figure">
+    <a aria-label="Open full-size chart for NHANES body measurement analysis" class="chart-link" href="../img/projects/nhanes-ratios.png">
+     <img alt="Box plots compare female and male waist-to-height and waist-to-hip ratios, showing differences in medians and substantial variation within groups." decoding="async" height="1869" loading="lazy" src="../img/projects/nhanes-ratios.png" width="3469"/>
+    </a>
+    <figcaption>
+     Waist-to-height and waist-to-hip ratio distributions in the analysed female and male samples. The plot describes this sample, not a clinical threshold or a causal effect.
+     <span class="figure-hint">
+      Select chart to view full size
+      <span aria-hidden="true">
+       ↗
+      </span>
+     </span>
+    </figcaption>
+   </figure>
+   <div class="case-content">
+    <section aria-labelledby="approach">
+     <p class="eyebrow">
+      The process
+     </p>
+     <h2 id="approach">
+      How I approached it
+     </h2>
+     <ul class="approach-list">
+      <li>
+       <h3>
+        Inspect and summarise measurements
+       </h3>
+       <p>
+        Reviewed the female and male extracts, handled missing values, and calculated descriptive statistics including location, spread, skewness and kurtosis.
+       </p>
+      </li>
+      <li>
+       <h3>
+        Create interpretable features
+       </h3>
+       <p>
+        Calculated BMI and waist-to-height and waist-to-hip ratios. Used standardization where needed to compare variables on different scales.
+       </p>
+      </li>
+      <li>
+       <h3>
+        Communicate distributions and relationships
+       </h3>
+       <p>
+        Used histograms, box plots and scatterplot matrices, alongside Pearson and Spearman correlation, to examine how the measurements vary and relate.
+       </p>
+      </li>
+     </ul>
+    </section>
+    <section aria-labelledby="findings">
+     <p class="eyebrow">
+      The evidence
+     </p>
+     <h2 id="findings">
+      What the results show
+     </h2>
+     <div class="finding">
+      <h3>
+       Ratios add context to raw measurements
+      </h3>
+      <p>
+       The retained box plots show different medians and overlapping distributions across the analysed groups. Averages alone cannot describe that variation.
+      </p>
+     </div>
+     <div class="finding">
+      <h3>
+       Visualization supports statistical interpretation
+      </h3>
+      <p>
+       Distribution plots expose outliers and asymmetry, while correlation views help distinguish the strength of relationships between measurements.
+      </p>
+     </div>
+    </section>
+   </div>
+   <section aria-labelledby="limits" class="limits">
+    <p class="eyebrow">
+     Reading the results responsibly
+    </p>
+    <h2 id="limits">
+     Where the evidence stops
+    </h2>
+    <p>
+     These are descriptive findings about the analyzed extracts. This case study does not claim causal relationships, clinical diagnoses or survey-weighted population estimates. Differences between sample groups need context before generalization.
+    </p>
+    <h3>
+     What I would evaluate next
+    </h3>
+    <p>
+     Document survey design and weighting before making population-level comparisons, and investigate unusual values against the original measurement definitions.
+    </p>
+   </section>
+   <section aria-labelledby="available" class="availability">
+    <h2 id="available">
+     Explore the work
+    </h2>
+    <p>
+     The GitHub repository contains the analysis notebook, figures, requirements and data documentation. The portfolio reproduces one aggregate figure; no participant records are included here.
+    </p>
+    <a class="text-link" href="https://github.com/staticbloom/nhanes-data-analysis">
+     Code, results &amp; methodology
+     <span aria-hidden="true">
+      ↗
+     </span>
+    </a>
+   </section>
+  </main>
+  <footer class="site-footer wrap">
+   <p>
+    Shiv Sharma · Data analytics &amp; machine learning
+   </p>
+   <a href="../projects.html">
+    <span aria-hidden="true">
+     ←
+    </span>
+    Back to projects
+   </a>
+  </footer>
+ </body>
+</html>
